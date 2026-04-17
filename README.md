@@ -100,42 +100,42 @@ Runs backend API server.
 
 ## 🔄 Sample Workflow
 
-1. 👤 Visitor opens registration portal  
-2. 📝 Enters personal details  
-3. 🏢 Adds visit purpose and department  
-4. 💻 Adds devices with serial numbers  
-5. 🆔 System generates Request ID  
-6. 👨‍💼 Admin reviews request  
-7. 🔁 Request moves through approval levels  
-8. 📌 Visitor tracks status online  
+1.  Visitor opens registration portal  
+2.  Enters personal details  
+3.  Adds visit purpose and department  
+4.  Adds devices with serial numbers  
+5.  System generates Request ID  
+6.  Admin reviews request  
+7.  Request moves through approval levels  
+8.  Visitor tracks status online  
 
 ---
 
 ## 👔 Admin Roles
 
-- 👨‍💼 Department Manager  
-- 🧑‍💼 Senior Officer  
-- 🏛️ General Manager  
+-  Department Manager  
+-  Senior Officer  
+-  General Manager  
 
 ---
 
 ## 🌍 Use Cases
 
-- 🏢 Government Offices  
-- ✈️ Defense Organizations  
-- 🔬 Research Centers  
-- 🏭 Manufacturing Plants  
-- 🏬 Secure Corporate Campuses  
+-  Government Offices  
+-  Defense Organizations  
+-  Research Centers  
+-  Manufacturing Plants  
+-  Secure Corporate Campuses  
 
 ---
 
 ## 🔐 Security Benefits
 
-- 📌 Device accountability  
-- 👀 Approval transparency  
-- 📄 Reduced paperwork  
-- ⚡ Faster processing  
-- 🗂️ Digital records  
+-  Device accountability  
+-  Approval transparency  
+-  Reduced paperwork  
+-  Faster processing  
+-  Digital records  
 
 ---
 
@@ -155,24 +155,24 @@ This repository is an **independent portfolio demo prototype** created for learn
 
 ## 🔮 Future Improvements
 
-- 📲 OTP Verification  
-- 🎫 QR Entry Pass  
-- 📧 Email Notifications  
-- ☁️ Cloud Deployment  
-- 🗄️ Real Database Integration  
+-  OTP Verification  
+-  QR Entry Pass  
+-  Email Notifications  
+-  Cloud Deployment  
+-  Real Database Integration  
 
 ---
 
 ## 👨‍💻 Author
 
-Developed by **Dhivi 🌟**
+Developed by J DEVI 
 
 ### Skills Demonstrated:
 
-- 💻 Full Stack Development  
-- 🎨 UI/UX Design  
-- ⚙️ Workflow Automation  
-- 🔐 Role-Based Access Control  
+-  Full Stack Development  
+-  UI/UX Design  
+-  Workflow Automation  
+-  Role-Based Access Control  
 
 ---
 
