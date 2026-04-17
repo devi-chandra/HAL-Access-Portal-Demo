@@ -1,22 +1,27 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: HAL Visitor & Device Access Management Portal API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: visitors
+    description: Visitor registration and management
+  - name: admin
+    description: Admin operations
+  - name: analytics
+    description: Analytics and statistics
+
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +29,181 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /visitors:
+    post:
+      operationId: createVisitorRequest
+      tags: [visitors]
+      summary: Submit a new visitor request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateVisitorRequestBody"
+      responses:
+        "201":
+          description: Request created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VisitorRequest"
+    get:
+      operationId: listVisitorRequests
+      tags: [admin]
+      summary: List all visitor requests (admin)
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [submitted, under_verification, pending_department, pending_senior, pending_gm, approved, rejected]
+        - name: department
+          in: query
+          schema:
+            type: string
+        - name: search
+          in: query
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        "200":
+          description: List of requests
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VisitorRequestList"
+
+  /visitors/{requestId}:
+    get:
+      operationId: getVisitorRequest
+      tags: [visitors]
+      summary: Get a visitor request by ID
+      parameters:
+        - name: requestId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Visitor request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VisitorRequest"
+        "404":
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /visitors/{requestId}/action:
+    post:
+      operationId: processVisitorRequest
+      tags: [admin]
+      summary: Approve, reject, or forward a visitor request
+      parameters:
+        - name: requestId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProcessRequestBody"
+      responses:
+        "200":
+          description: Updated request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VisitorRequest"
+
+  /admin/login:
+    post:
+      operationId: adminLogin
+      tags: [admin]
+      summary: Admin login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminLoginBody"
+      responses:
+        "200":
+          description: Login success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminLoginResponse"
+        "401":
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /analytics/summary:
+    get:
+      operationId: getAnalyticsSummary
+      tags: [analytics]
+      summary: Get analytics summary stats
+      responses:
+        "200":
+          description: Analytics summary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsSummary"
+
+  /analytics/recent:
+    get:
+      operationId: getRecentActivity
+      tags: [analytics]
+      summary: Get recent activity feed
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+      responses:
+        "200":
+          description: Recent activity
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecentActivityList"
+
+  /analytics/departments:
+    get:
+      operationId: getDepartmentStats
+      tags: [analytics]
+      summary: Get requests grouped by department
+      responses:
+        "200":
+          description: Department stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DepartmentStatsList"
+
 components:
   schemas:
     HealthStatus:
@@ -31,6 +211,321 @@ components:
       properties:
         status:
           type: string
-      required:
-        - status
+      required: [status]
 
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+      required: [error]
+
+    DeviceEntry:
+      type: object
+      properties:
+        deviceType:
+          type: string
+          enum: [Phone, Laptop, Camera, Tablet, Pendrive, Other]
+        brand:
+          type: string
+        model:
+          type: string
+        serialNumber:
+          type: string
+        ownershipProofNumber:
+          type: string
+        reason:
+          type: string
+      required: [deviceType, brand, model, serialNumber, reason]
+
+    StatusHistoryEntry:
+      type: object
+      properties:
+        status:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        comment:
+          type: string
+        updatedBy:
+          type: string
+      required: [status, timestamp]
+
+    VisitorRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+        requestId:
+          type: string
+        fullName:
+          type: string
+        mobileNumber:
+          type: string
+        email:
+          type: string
+        address:
+          type: string
+        nationality:
+          type: string
+        idProofType:
+          type: string
+        idProofNumber:
+          type: string
+        companyName:
+          type: string
+        employeeId:
+          type: string
+        designation:
+          type: string
+        purposeOfVisit:
+          type: string
+        department:
+          type: string
+        division:
+          type: string
+        building:
+          type: string
+        visitDate:
+          type: string
+        visitTime:
+          type: string
+        expectedDuration:
+          type: string
+        personToMeet:
+          type: string
+        carryingDevices:
+          type: boolean
+        devices:
+          type: array
+          items:
+            $ref: "#/components/schemas/DeviceEntry"
+        status:
+          type: string
+          enum: [submitted, under_verification, pending_department, pending_senior, pending_gm, approved, rejected]
+        rejectionReason:
+          type: string
+        statusHistory:
+          type: array
+          items:
+            $ref: "#/components/schemas/StatusHistoryEntry"
+        currentReviewer:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - requestId
+        - fullName
+        - mobileNumber
+        - email
+        - purposeOfVisit
+        - department
+        - visitDate
+        - visitTime
+        - personToMeet
+        - carryingDevices
+        - status
+        - createdAt
+        - updatedAt
+
+    CreateVisitorRequestBody:
+      type: object
+      properties:
+        fullName:
+          type: string
+        mobileNumber:
+          type: string
+        email:
+          type: string
+        address:
+          type: string
+        nationality:
+          type: string
+        idProofType:
+          type: string
+        idProofNumber:
+          type: string
+        companyName:
+          type: string
+        employeeId:
+          type: string
+        designation:
+          type: string
+        purposeOfVisit:
+          type: string
+        department:
+          type: string
+        division:
+          type: string
+        building:
+          type: string
+        visitDate:
+          type: string
+        visitTime:
+          type: string
+        expectedDuration:
+          type: string
+        personToMeet:
+          type: string
+        carryingDevices:
+          type: boolean
+        devices:
+          type: array
+          items:
+            $ref: "#/components/schemas/DeviceEntry"
+      required:
+        - fullName
+        - mobileNumber
+        - email
+        - purposeOfVisit
+        - department
+        - visitDate
+        - visitTime
+        - personToMeet
+        - carryingDevices
+
+    VisitorRequestList:
+      type: object
+      properties:
+        requests:
+          type: array
+          items:
+            $ref: "#/components/schemas/VisitorRequest"
+        total:
+          type: integer
+        page:
+          type: integer
+        limit:
+          type: integer
+      required: [requests, total, page, limit]
+
+    ProcessRequestBody:
+      type: object
+      properties:
+        action:
+          type: string
+          enum: [approve, reject, forward]
+        comment:
+          type: string
+        rejectionReason:
+          type: string
+        reviewerRole:
+          type: string
+      required: [action, reviewerRole]
+
+    AdminLoginBody:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        role:
+          type: string
+          enum: [department_manager, senior_officer, general_manager]
+      required: [username, password, role]
+
+    AdminLoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        role:
+          type: string
+        name:
+          type: string
+      required: [token, role, name]
+
+    AnalyticsSummary:
+      type: object
+      properties:
+        totalRequests:
+          type: integer
+        pendingRequests:
+          type: integer
+        approvedRequests:
+          type: integer
+        rejectedRequests:
+          type: integer
+        devicesRequestedToday:
+          type: integer
+        submittedToday:
+          type: integer
+        underVerification:
+          type: integer
+        pendingAtDepartment:
+          type: integer
+        pendingAtSenior:
+          type: integer
+        pendingAtGM:
+          type: integer
+      required:
+        - totalRequests
+        - pendingRequests
+        - approvedRequests
+        - rejectedRequests
+        - devicesRequestedToday
+        - submittedToday
+        - underVerification
+        - pendingAtDepartment
+        - pendingAtSenior
+        - pendingAtGM
+
+    RecentActivity:
+      type: object
+      properties:
+        requestId:
+          type: string
+        visitorName:
+          type: string
+        action:
+          type: string
+        status:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        department:
+          type: string
+      required: [requestId, visitorName, action, status, timestamp, department]
+
+    RecentActivityList:
+      type: object
+      properties:
+        activities:
+          type: array
+          items:
+            $ref: "#/components/schemas/RecentActivity"
+      required: [activities]
+
+    DepartmentStat:
+      type: object
+      properties:
+        department:
+          type: string
+        total:
+          type: integer
+        approved:
+          type: integer
+        rejected:
+          type: integer
+        pending:
+          type: integer
+      required: [department, total, approved, rejected, pending]
+
+    DepartmentStatsList:
+      type: object
+      properties:
+        departments:
+          type: array
+          items:
+            $ref: "#/components/schemas/DepartmentStat"
+      required: [departments]

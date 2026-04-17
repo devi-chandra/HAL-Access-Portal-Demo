@@ -1,0 +1,221 @@
+```text
+Build a complete professional demo web application called:
+
+HAL Visitor & Device Access Management Portal (Demo)
+
+This is a portfolio demo project inspired by workflow requirements observed during an internship project in a high-security government aerospace organization environment.
+
+IMPORTANT DISCLAIMER TO SHOW IN README / FOOTER:
+- This is an independent demo prototype created for learning and portfolio purposes.
+- This is NOT an official HAL internal system.
+- Internal technologies, infrastructure, architecture, and confidential code are not included.
+- This demo uses a separate public tech stack only to recreate the workflow concept.
+
+--------------------------------------------------
+TECH STACK
+--------------------------------------------------
+
+Use a modern downloadable full project with:
+
+Frontend:
+- HTML
+- CSS
+- JavaScript
+- Bootstrap or Tailwind
+
+Backend:
+- Node.js + Express
+
+Database:
+- SQLite or MongoDB
+
+Authentication:
+- Role-based login demo
+
+Generate clean folder structure and production-looking UI.
+
+--------------------------------------------------
+DESIGN STYLE
+--------------------------------------------------
+
+Use professional government enterprise dashboard design:
+
+- Dark blue
+- White
+- Steel gray
+- Minimal premium look
+- Secure portal feel
+- Responsive mobile + desktop
+
+--------------------------------------------------
+MAIN HOMEPAGE
+--------------------------------------------------
+
+Create landing page with hero section and 3 main portal cards:
+
+1. Visitor Registration
+2. Track Request Status
+3. Admin Portal
+
+Also include:
+- About system
+- Security workflow highlights
+- Footer disclaimer
+
+--------------------------------------------------
+PAGE 1: VISITOR REGISTRATION
+--------------------------------------------------
+
+Create a detailed smart form.
+
+Sections:
+
+A) Personal Details
+- Full Name
+- Mobile Number
+- Email
+- Address
+- Nationality
+- ID Proof Type (Aadhaar / Passport / PAN / Voter ID)
+- ID Proof Number
+
+B) Professional Details
+- Company / Organization Name
+- Employee ID
+- Designation
+
+C) Visit Details
+- Purpose of Visit
+- Department to Visit
+- Division to Visit
+- Building / Workshop / Block
+- Visit Date
+- Visit Time
+- Expected Duration
+- Person to Meet
+
+D) Device Entry Details
+
+Checkbox:
+Are you carrying devices?
+
+If yes allow multiple device rows:
+
+- Device Type (Phone / Laptop / Camera / Tablet / Pendrive / Other)
+- Brand
+- Model
+- Serial Number / IMEI / Registration Number
+- Ownership Proof Number
+- Reason for Carrying Device
+
+E) Upload Documents
+- ID Proof Upload
+- Official Letter Upload
+- Device Proof Upload
+
+After submit:
+
+Generate Request ID automatically like:
+
+HAL-2026-0001
+
+Show success page with request ID.
+
+--------------------------------------------------
+PAGE 2: TRACK REQUEST STATUS
+--------------------------------------------------
+
+Search box:
+
+Enter Request ID
+
+Display progress timeline:
+
+- Submitted
+- Under Verification
+- Pending at Department Manager
+- Pending at Senior Officer
+- Pending at General Manager
+- Approved
+- Rejected
+
+If rejected show reason.
+
+If approved show visit date/time.
+
+--------------------------------------------------
+PAGE 3: ADMIN LOGIN
+--------------------------------------------------
+
+Create demo login with 3 role options:
+
+1. Department Manager
+2. Senior Officer
+3. General Manager
+
+--------------------------------------------------
+ADMIN DASHBOARD
+--------------------------------------------------
+
+After login show dashboard with:
+
+- Pending Requests
+- Approved Requests
+- Rejected Requests
+- Search Requests
+- Filter by department
+
+For each request card show:
+
+- Visitor Name
+- Purpose
+- Date
+- Devices
+- Documents
+- Status
+
+Actions:
+
+- Approve
+- Reject
+- Add Comment
+- Forward to Next Level
+
+--------------------------------------------------
+ANALYTICS SECTION
+--------------------------------------------------
+
+Dashboard cards:
+
+- Total Requests
+- Pending
+- Approved
+- Rejected
+- Devices Requested Today
+
+--------------------------------------------------
+EXTRA FEATURES
+--------------------------------------------------
+
+- Notifications / toast messages
+- Form validation
+- Modern tables
+- Nice icons
+- Demo seeded data
+- Smooth animations
+- Responsive layout
+
+--------------------------------------------------
+README REQUIREMENT
+--------------------------------------------------
+
+Generate README.md that clearly states:
+
+This is a demo portfolio project inspired by internship workflow exposure and not official HAL software.
+
+--------------------------------------------------
+OUTPUT REQUIRED
+--------------------------------------------------
+
+Generate complete downloadable project folder with all source code ready for GitHub upload and local run instructions.
+```
