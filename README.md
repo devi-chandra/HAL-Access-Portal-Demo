@@ -1,122 +1,187 @@
-# HAL Visitor & Device Access Management Portal (Demo)
+# 🛡️ HAL Visitor & Device Access Management Portal (Demo)
 
-## Disclaimer
-
-> **This is an independent demo prototype created for learning and portfolio purposes.**
-> 
-> This is **NOT** an official HAL (Hindustan Aeronautics Limited) internal system. Internal technologies, infrastructure, architecture, and any confidential code are **not** included. This demo uses a completely separate public technology stack only to recreate the concept of a visitor and device access management workflow observed during an internship experience in a high-security government aerospace environment.
+A modern full-stack demo web application designed to digitize visitor approval and device entry workflows for secure organizations.
 
 ---
 
-## About
+## 🌟 Overview
 
-A full-stack professional demo web application simulating a **Visitor & Device Access Management Portal** for a high-security aerospace facility. It demonstrates the complete workflow of visitor registration, multi-level approval chains, device entry tracking, and admin review — inspired by similar real-world government enterprise workflows.
+This project transforms manual paper-based visitor permission systems into a centralized digital platform for registration, request tracking, and multi-level approvals.
 
----
-
-## Features
-
-### Public Portal
-- **Visitor Registration** — Multi-section smart form covering personal, professional, visit, and device details
-- **Track Request Status** — 7-stage timeline tracker (Submitted → Approved/Rejected)
-- **Auto-generated Request IDs** — Format: `HAL-YYYY-XXXX`
-- **Document Upload UI** — ID proof, official letter, device proof
-
-### Admin Portal (Role-based)
-- **3 Admin Roles**: Department Manager, Senior Officer, General Manager
-- **Dashboard with Analytics** — Total, pending, approved, rejected, devices requested today
-- **Department Statistics Chart** — Bar chart visualization using Recharts
-- **Request Management** — Approve, reject, forward to next level, add comments
-- **Search & Filter** — By status, department, name, request ID
-- **Recent Activity Feed** — Live update of latest request changes
-- **Toast notifications** for all actions
+The concept was inspired by workflow exposure during an internship at **Hindustan Aeronautics Limited (HAL)**.
 
 ---
 
-## Tech Stack
+## 🚀 Features
 
-| Layer | Technology |
-|---|---|
-| Frontend | React + TypeScript + Vite |
-| Styling | Tailwind CSS + shadcn/ui |
-| Forms | React Hook Form + Zod |
-| Animations | Framer Motion |
-| Charts | Recharts |
-| Icons | Lucide React |
-| Backend | Node.js + Express 5 |
-| Database | PostgreSQL + Drizzle ORM |
-| API Layer | OpenAPI 3.1 + Orval codegen |
-| Routing | Wouter |
-| State | TanStack React Query |
+- 📝 Visitor Registration Portal  
+- 💻 Device Serial Number Logging  
+- 🆔 Auto Request ID Generation  
+- 🔍 Request Status Tracking  
+- ✅ Multi-Level Admin Approval  
+- 📊 Analytics Dashboard  
+- 📱 Responsive Modern UI  
 
 ---
 
-## Local Development
+## 🛠️ Tech Stack
 
-### Prerequisites
-- Node.js 20+
-- pnpm
-- PostgreSQL database (set `DATABASE_URL` env variable)
+- ⚛️ React  
+- 📘 TypeScript  
+- ⚡ Vite  
+- 🟢 Node.js  
+- 🚂 Express.js  
+- 📦 PNPM Workspace  
 
-### Setup
+---
 
-```bash
-# Install dependencies
+## 📁 Project Structure
+
+HAL-ACCESS-PORTAL-DEMO/  
+├── artifacts/  
+│   ├── api-server/  
+│   ├── hal-portal/  
+│   └── mockup-sandbox/  
+
+├── attached_assets/  
+
+├── lib/  
+│   ├── api-client-react/  
+│   ├── api-spec/  
+│   ├── api-zod/  
+│   └── db/  
+
+├── scripts/  
+│   └── src/  
+
+├── package.json  
+├── pnpm-lock.yaml  
+├── pnpm-workspace.yaml  
+├── tsconfig.json  
+├── README.md  
+└── .gitignore
+
+---
+
+## ⚙️ Installation
+
+### 📥 Clone Repository
+
+git clone YOUR_REPOSITORY_LINK  
+cd HAL-ACCESS-PORTAL-DEMO
+
+---
+
+## 📦 Install Dependencies
+
 pnpm install
 
-# Push database schema
-pnpm --filter @workspace/db run push
+---
 
-# Start API server (development)
-pnpm --filter @workspace/api-server run dev
+## 🎨 Frontend Setup
 
-# Start frontend (development)
-pnpm --filter @workspace/hal-portal run dev
-```
+cd artifacts/hal-portal  
+pnpm dev
 
-### Demo Credentials
-
-| Role | Username | Password |
-|---|---|---|
-| Department Manager | `dept_manager` | `demo123` |
-| Senior Officer | `senior_officer` | `demo123` |
-| General Manager | `general_manager` | `demo123` |
+Runs frontend locally in browser.
 
 ---
 
-## Approval Workflow
+## 🔧 Backend Setup
 
-```
-Visitor Submits Request
-        ↓
-Under Verification (Security)
-        ↓
-Pending at Department Manager
-        ↓
-Pending at Senior Officer
-        ↓
-Pending at General Manager
-        ↓
-   Approved / Rejected
-```
+Open another terminal:
+
+cd artifacts/api-server  
+pnpm dev
+
+Runs backend API server.
 
 ---
 
-## Project Structure
+## 🔄 Sample Workflow
 
-```
-artifacts/
-  api-server/         # Express 5 REST API
-  hal-portal/         # React + Vite frontend
-lib/
-  db/                 # Drizzle ORM schema (PostgreSQL)
-  api-spec/           # OpenAPI 3.1 specification
-  api-client-react/   # Generated React Query hooks
-  api-zod/            # Generated Zod validation schemas
-```
+1. 👤 Visitor opens registration portal  
+2. 📝 Enters personal details  
+3. 🏢 Adds visit purpose and department  
+4. 💻 Adds devices with serial numbers  
+5. 🆔 System generates Request ID  
+6. 👨‍💼 Admin reviews request  
+7. 🔁 Request moves through approval levels  
+8. 📌 Visitor tracks status online  
 
 ---
 
-## Portfolio Note
+## 👔 Admin Roles
 
-This project was built as a portfolio demonstration. The workflow concept is inspired by real-world visitor management systems in high-security government facilities, but all implementation details, code, and architecture are original and created independently.
+- 👨‍💼 Department Manager  
+- 🧑‍💼 Senior Officer  
+- 🏛️ General Manager  
+
+---
+
+## 🌍 Use Cases
+
+- 🏢 Government Offices  
+- ✈️ Defense Organizations  
+- 🔬 Research Centers  
+- 🏭 Manufacturing Plants  
+- 🏬 Secure Corporate Campuses  
+
+---
+
+## 🔐 Security Benefits
+
+- 📌 Device accountability  
+- 👀 Approval transparency  
+- 📄 Reduced paperwork  
+- ⚡ Faster processing  
+- 🗂️ Digital records  
+
+---
+
+## ⚠️ Disclaimer
+
+This repository is an **independent portfolio demo prototype** created for learning and showcasing development skills.
+
+- The original internship project was completed as a **team project** in a secure offline environment.  
+- Due to confidentiality and internal restrictions, the original project source code cannot be shared publicly.  
+- This public version is a **separately recreated demo prototype** developed individually by me.  
+- The technologies, architecture, tools, platforms, and deployment environment used here are **different from the actual internship implementation**.  
+- This demo version was created with the help of various development platforms and tools for portfolio purposes.  
+- No confidential internal systems, code, infrastructure, or organizational data are included.  
+- This repository represents only the workflow concept in a public environment.  
+
+---
+
+## 🔮 Future Improvements
+
+- 📲 OTP Verification  
+- 🎫 QR Entry Pass  
+- 📧 Email Notifications  
+- ☁️ Cloud Deployment  
+- 🗄️ Real Database Integration  
+
+---
+
+## 👨‍💻 Author
+
+Developed by **Dhivi 🌟**
+
+### Skills Demonstrated:
+
+- 💻 Full Stack Development  
+- 🎨 UI/UX Design  
+- ⚙️ Workflow Automation  
+- 🔐 Role-Based Access Control  
+
+---
+
+## ⭐ Support
+
+If you like this project, consider giving it a **star ⭐** on GitHub!
+
+---
+
+## 📜 License
+
+Educational and portfolio use only.
